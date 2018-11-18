@@ -1,0 +1,17 @@
+转载自：http://www.deepinghost.com/sem/other/4207.html
+
+1. Bug源
+    - 操作：yum install gcc
+    - log：缺少 kernel-headers
+2. 解决
+    - 查看 内核版本
+        uname -r
+    - 查看当前yum仓库中的kernel-headers的版本是否和内核版本一致。
+        yum list | grep kernel-headers
+    - 一致
+        yum install kernel-headers
+    - 手动安装
+        - 下载kernel-headers-3.10.0-327.el7.x86_64.rpm（地址：kernel-headers Download （RPM， TXZ）：http://pkgs.org/download/kernel-headers）
+            wget http://pkgs.org/centos-7/centos-x86_64/kernel-headers-3.10.0-327.el7.x86_64.rpm.html
+        - 安装
+            rpm -ivh kernel-headers-3.10.0-327.el7.x86_64.rpm

@@ -1,0 +1,43 @@
+转载自：https://www.jianshu.com/p/96691511295f
+
+- 通过yum安装
+    - 直接通过 yum install nginx 肯定是不行的,因为yum没有nginx，所以首先把 nginx 的源加入 yum 中
+    - 安装
+        1.将nginx放到yum repro库中
+            rpm -ivh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
+
+        2.查看nginx信息
+            yum info nginx
+
+        3.使用yum安装ngnix
+            yum install nginx
+        4.启动nginx
+            service nginx start
+        5.查看nginx版本
+            nginx -v
+        6.访问nginx，现在你可以通过公网ip (本地可以通过 localhost /或 127.0.0.1 ) 查看nginx 服务返回的信息。
+            curl -i localhost
+        7.nginx配置文件位置在/etc/nginx/
+            ll /etc/nginx/
+- 实践
+    - 目的：修改服务名，接着从外部访问这个服务
+    - 操作：
+        - 修改nginx配置文件
+        - vim /etc/nginx/conf.d/default.conf
+        - 修改server_name部分：server_name  yytest.com;
+    - 重载服务
+        /usr/sbin/nginx -s reload
+    - 从外部访问nginx服务(192.168.10.11)
+        如在客户机(192.168.10.10)的浏览器访问：http://yytest.com
+        - 你发现访问不了
+            - 你没有在hosts文件做映射
+            - nginx服务器的80端口堵塞或防火墙没关
+- Nginx常用操作
+    - 启动:
+        /usr/sbin/nginx或任意路径下运行service nginx start (centos7是systemctl start nginx.service )
+    - 重启
+        /usr/sbin/nginx –s reload
+    - 停止
+        /usr/sbin/nginx –s stop
+    - 测试配置文件是否正常：
+        /usr/sbin/nginx –t

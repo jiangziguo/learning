@@ -1,0 +1,26 @@
+1. 下载 -> 安装 -> 启动 -> 客户端连接
+    -- 下载
+        - cd /export/servers/
+        - wget http://download.redis.io/releases/redis-3.2.12.tar.gz
+        - tar -zvxf redis-3.2.12.tar.gz
+    -- 安装
+        - yum install gcc
+        - cd redis-3.2.12
+        - make
+    -- 启动
+        - ./src/redis-server redis.conf
+    -- 客户端连接
+        - ./src/redis-cli
+
+2. 配置文件
+   - bind 127.0.0.1  //绑定ip，不绑定则注销掉即可
+   - protected-mode yes //关闭掉之后才能进行远程连接
+   - port 6379 //修改端口
+   - daemonize yes  //是否后台启动
+   - databases 16 //数据库数
+   - save 900 1 //SNAPSHOTTING参数
+   - save 300 10
+   - save 60 10000
+   - requirepass foobared //密码设置
+   - appendonly no //是否开启aof
+
